@@ -7,4 +7,4 @@ def search():
     form = searchForm(request.form)
     print(form)
     if form.validate():
-        return 'hello word'
+        return 'hello word 1'
