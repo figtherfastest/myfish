@@ -12,6 +12,8 @@ class YuShuBook:
     def search_by_isbn(self):
         url = self.isbn_url
         result = HTTP.get(url)
+        print(result)
+        print(url)
         self.__fill_singer(result)
 
     def __fill_singer(self,data):
@@ -20,7 +22,7 @@ class YuShuBook:
             self.books.append(data)
 
     def search_by_keyword(self,keyword,page=1):
-        url = self.keyword_url.format(keyword,current_app.config['PER_PAGE'],self.calculate_start)
+        url = self.keyword_url.format(keyword,current_app.config['PER_PAGE'],self.calculate_start(page))
         result = HTTP.get(url)
         self.__fill_collection(result)
 
