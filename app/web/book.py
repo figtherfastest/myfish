@@ -26,11 +26,10 @@ def search():
         book.fill(yushu_book, q)
         return json.dumps(book, default=lambda o: o.__dict__)
 
-@web.route('/book/<isbn>/detail/')
+@web.route('/book/detail/<isbn>')
 def book_detail(isbn):
     yushu_book = YuShuBook()
     yushu_book.search_by_isbn(isbn)
-    # return json.dumps(yushu_book, default=lambda o: o.__dict__)
     book = BookViewModel(yushu_book.books[0])
     return json.dumps(book, default=lambda o: o.__dict__)
 
