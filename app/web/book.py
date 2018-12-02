@@ -1,10 +1,12 @@
-from flask import request
+from flask import request, jsonify
 from . import web
 from app.forms.book import searchForm
 from app.lib.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookCollection
+from app.view_models.book import BookViewModel
 import json
+
 
 @web.route('/book/search/')
 def search():
@@ -22,6 +24,15 @@ def search():
             yushu_book.search_by_keyword(q, page)
 
         book.fill(yushu_book, q)
-
         return json.dumps(book, default=lambda o: o.__dict__)
-        # return yushu_book
+
+@web.route('/book/<isbn>/detail/')
+def book_detail(isbn):
+    yushu_book = YuShuBook()
+    yushu_book.search_by_isbn(isbn)
+    # return json.dumps(yushu_book, default=lambda o: o.__dict__)
+    book = BookViewModel(yushu_book.books[0])
+    return json.dumps(book, default=lambda o: o.__dict__)
+
+
+
