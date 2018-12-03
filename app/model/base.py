@@ -7,3 +7,8 @@ db = SQLAlchemy()
 class Base(db.Model):
     __abstract__ = True
     status = Column(SmallInteger, default=1)
+
+    def set_attrs(self, attr_dict):
+        for key ,value in attr_dict.items():
+            if hasattr(self, key):
+                setattr(self, key, value)
