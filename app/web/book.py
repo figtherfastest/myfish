@@ -12,6 +12,7 @@ import json
 def search():
     form = searchForm(request.args)
     book = BookCollection()
+    print(form)
     if form.validate():
         q = form.q.data
         page = form.page.data
