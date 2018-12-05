@@ -8,11 +8,12 @@ from app.view_models.book import BookViewModel
 import json
 
 
-@web.route('/book/search/')
+@web.route('/book/search')
 def search():
     form = searchForm(request.args)
     book = BookCollection()
     print(form)
+    print(request.args)
     if form.validate():
         q = form.q.data
         page = form.page.data
