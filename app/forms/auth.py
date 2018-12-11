@@ -1,6 +1,6 @@
-from wtforms import Form, StringField, PasswordField
+from wtforms import StringField, PasswordField
+from app.forms.base import BaseForm as Form
 from wtforms.validators import DataRequired, Length, Email, ValidationError
-
 from app.model.user import User
 
 

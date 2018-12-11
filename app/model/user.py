@@ -1,7 +1,5 @@
-
-
-from sqlalchemy import Column, Integer, String, Boolean, Float
-from app.model.base import db,Base
+from sqlalchemy import Column, Integer, String
+from app.model.base import Base
 from werkzeug.security import generate_password_hash
 
 class User(Base):

@@ -1,10 +1,8 @@
 from flask import Flask
-from flask_cors import CORS
 from app.model.base import db
 
 def create_app():
     app = Flask(__name__)
-    CORS(app)
     app.config.from_object("app.secure")
     app.config.from_object("app.setting")
     register_blueprint(app)
@@ -16,5 +14,5 @@ def create_app():
 
 
 def register_blueprint(app):
-    from app.web import web
+    from app.api import web
     app.register_blueprint(web)
