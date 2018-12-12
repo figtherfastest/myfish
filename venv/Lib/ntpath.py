@@ -335,7 +335,7 @@ def expanduser(path):
 # XXX except '^|<>='.
 
 def expandvars(path):
-    """Expand shell variables of the forms $var, ${var} and %var%.
+    """Expand shell variables of the validators $var, ${var} and %var%.
 
     Unknown variables are left unchanged."""
     path = os.fspath(path)

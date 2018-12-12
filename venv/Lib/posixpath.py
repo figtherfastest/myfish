@@ -269,7 +269,7 @@ def expanduser(path):
 
 
 # Expand paths containing shell variable substitutions.
-# This expands the forms $variable and ${variable} only.
+# This expands the validators $variable and ${variable} only.
 # Non-existent variables are left unchanged.
 
 _varprog = None

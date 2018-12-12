@@ -1,6 +1,6 @@
 from flask import request
 from . import web
-from app.forms.book import searchForm
+from app.validators.book import searchForm
 from app.lib.helper import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookCollection
