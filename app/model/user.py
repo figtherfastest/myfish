@@ -3,12 +3,16 @@ from app.model.base import Base
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.lib.error_code import AuthFailed
 
+
 class User(Base):
     id = Column(Integer, primary_key=True)
     nickname = Column(String(24), nullable=False)
     email = Column(String(50), unique=True, nullable=False)
     auth = Column(SmallInteger, default=1)
     _password = Column('password', String(128), nullable=False)
+
+    def keys(self):
+        return ['id', 'email', 'nickname', 'auth']
 
     @property
     def password(self):

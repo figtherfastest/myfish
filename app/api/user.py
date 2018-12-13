@@ -13,5 +13,3 @@ def register():
         user.set_attrs(form.data)
         db.session.add(user)
     return Success()
-
-
