@@ -11,11 +11,17 @@ class AdminScope(Scope):
 
     def __init__(self):
         self.add(UserScope())
-        print(self.allow_api)
 
 
 class UserScope(Scope):
     allow_api = {'user'}
 
 
-AdminScope()
+def is_in_scope(scope, endpoint):
+    scope = globals()[scope]()
+    if endpoint in scope:
+        return True
+    else:
+        return False
+
+
