@@ -1,6 +1,6 @@
 from app import create_app
-from app.lib.error import APIException
-from app.lib.error_code import ServerError
+from app.libs.error import APIException
+from app.libs.error_code import ServerError
 from werkzeug.exceptions import HTTPException
 
 app = create_app()

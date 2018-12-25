@@ -1,6 +1,6 @@
 # 把请求的过程分装在这里
 
-from app.lib.getHttp import HTTP
+from app.libs.getHttp import HTTP
 from flask import current_app
 
 class YuShuBook:

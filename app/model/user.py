@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, SmallInteger
-from app.model.base import Base
+from app.model.base import Base, db
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.lib.error_code import AuthFailed
+from app.libs.error_code import AuthFailed
 
 
 class User(Base):
@@ -23,11 +23,21 @@ class User(Base):
         self._password = generate_password_hash(raw)
 
     @staticmethod
+    def register_by_email(nickname, account, secret):
+        with db.auto_commit():
+            user = User()
+            user.nickname = nickname
+            user.email = account
+            user.password = secret
+            db.session.add(user)
+
+    @staticmethod
     def verify(email, password):
         user = User.query.filter_by(email=email).first_or_404()
         if not user.check_password(password):
             raise AuthFailed()
-        return {'uid': user.id}
+        scope = 'AdminScope' if user.auth == 2 else 'UserScope'
+        return {'id': user.id, 'scope': scope}
 
     def check_password(self, raw):
         if not self._password:

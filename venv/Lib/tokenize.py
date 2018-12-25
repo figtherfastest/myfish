@@ -8,7 +8,7 @@ It accepts a readline-like method which is called repeatedly to get the
 next line of input (or b"" for EOF).  It generates 5-tuples with these
 members:
 
-    the token type (see token.py)
+    the token type (see login.py)
     the token (a string)
     the starting (row, column) indices of the token (a 2-tuple of ints)
     the ending (row, column) indices of the token (a 2-tuple of ints)

@@ -7,7 +7,7 @@ __all__ = ['tok_name', 'ISTERMINAL', 'ISNONTERMINAL', 'ISEOF']
 #  To update the symbols in this file, 'cd' to the top directory of
 #  the python source tree after building the interpreter and run:
 #
-#    ./python Lib/token.py
+#    ./python Lib/login.py
 
 #--start constants--
 ENDMARKER = 0
@@ -95,7 +95,7 @@ def _main():
     import sys
     args = sys.argv[1:]
     inFileName = args and args[0] or "Include/token.h"
-    outFileName = "Lib/token.py"
+    outFileName = "Lib/login.py"
     if len(args) > 1:
         outFileName = args[1]
     try:

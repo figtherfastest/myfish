@@ -1,12 +1,12 @@
 from app.validators.base import BaseForm as Form
-from wtforms import StringField, IntegerField, PasswordField
+from wtforms import StringField, IntegerField, PasswordField, ValidationError
 from wtforms.validators import DataRequired, NumberRange, Length, Email, ValidationError, Regexp
 from app.model.user import User
 
 
 
 class ClientForm(Form):
-    account = StringField(validators=[DataRequired(message='不能为空'), Length(
+    account = StringField(validators=[DataRequired(message='账号不能为空'), Length(
         min=6,max=30
     )])
     password = StringField()
@@ -26,7 +26,7 @@ class RegisterForm(ClientForm):
                                              Length(min=2,max=100, message='昵称至少需要两个字符，最多10个字符')])
     password = PasswordField('密码', validators=[DataRequired(message='至少两位'), Length(min=6,max=32)])
 
-    def validate_email(self, field):
+    def validate_account(self, field):
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('电子邮件已被注册')
 
@@ -39,10 +39,14 @@ class UserEmailForm(ClientForm):
     account = StringField(validators=[
         Email(message='invalidate email')
     ])
-    secret = StringField(validators=[
+    password = StringField(validators=[
         DataRequired(),
         # password can only include letters , numbers and "_"
         Regexp(r'^[A-Za-z0-9_*&$#@]{6,22}$')
     ])
     nickname = StringField(validators=[DataRequired(),
                                        Length(min=2, max=22)])
+
+    def validate_account(self, value):
+        if User.query.filter_by(email=value.data).first():
+            raise ValidationError()

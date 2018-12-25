@@ -1,7 +1,7 @@
 
 from werkzeug.exceptions import HTTPException
 
-from app.lib.error import APIException
+from app.libs.error import APIException
 
 __author__ = '七月'
 

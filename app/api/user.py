@@ -1,36 +1,18 @@
-from . import web
-from app.validators.form import RegisterForm, UserEmailForm
+from flask import jsonify, g
 from app.model.user import User
-from app.model.base import db
-from app.lib.error_code import Success
-from app.lib.enum import ClientTypeEnmu
+from app.libs.token_auth import auth
+from . import web
 
 
-@web.route('/register',methods=['POST'])
-def register():
-    form = RegisterForm().validate_for_api()
-    promise = {
-        ClientTypeEnmu.USER_EMAIL: __register_user_by_email
-    }
-    promise[form.type.data]()
-    return Success()
+@web.route('/getUser', methods=['GET'])
+@auth.login_required
+def get_user():
+    uid = g.user.id
+    user = User.query.filter_by(id=uid).first_or_404()
+    return jsonify(user)
 
 
-def __register_user_by_email():
-    form = UserEmailForm.validate_for_api()
-    with db.auto_commit():
-        user = User()
-        user.nickname = form.nickname.data
-        user.email = form.account.data
-        user.password = form.password.data
-        db.session.add(user)
-
-
-# @web.route('/register',methods=['POST'])
-# def register():
-#     form = RegisterForm().validate_for_api()
-#     with db.auto_commit():
-#         user = User()
-#         user.set_attrs(form.data)
-#         db.session.add(user)
-#     return Success()
+@web.route('/getUsers', methods=['GET'])
+@auth.login_required
+def get_users():
+    pass

@@ -2,7 +2,7 @@ from flask import Flask as _Flask
 from app.model.base import db
 from flask.json import JSONEncoder as _JSONEncoder
 from datetime import date
-from app.lib.error_code import ServerError
+from app.libs.error_code import ServerError
 
 
 def create_app():
