@@ -1,19 +1,34 @@
-class scope:
+class Scope:
+    allow_api = []
+
     def __add__(self, other):
-        pass
+        self.allow_api = self.allow_api + other.allow_api
+        self.allow_api = list(set(self.allow_api))
 
 
-class UserScope():
+class UserScope(Scope):
     allow_api = ['api.get_user']
 
 
-class AdminScope():
-    allow_api = []
+class AdminScope(Scope):
+    allow_api = ['api.A', 'api.B']
 
+    def __init__(self):
+        self+UserScope()
+        print(self.allow_api)
+
+
+class SuperScope(Scope):
+    allow_api = ['api.C', 'api.D']
+
+    def __init__(self):
+        self+AdminScope()
+        print(self.allow_api)
+
+SuperScope()
 
 def is_in_scope(scope, endpoint):
     scope = globals()[scope]()
-    print(endpoint)
     if endpoint in scope.allow_api:
         return True
     else:

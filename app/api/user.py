@@ -12,7 +12,7 @@ def get_user():
     return jsonify(user)
 
 
-@web.route('/getUsers', methods=['GET'])
+@web.route('/getAdminUser', methods=['GET'])
 @auth.login_required
-def get_users():
+def get_admin_users():
     pass
