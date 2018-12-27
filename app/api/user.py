@@ -12,7 +12,8 @@ def get_user():
     return jsonify(user)
 
 
-@web.route('/getAdminUser', methods=['GET'])
+@web.route('/getAdminUser/<int:id>', methods=['GET'])
 @auth.login_required
-def get_admin_users():
+def get_admin_users(id):
+    print(id)
     pass

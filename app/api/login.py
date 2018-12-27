@@ -1,12 +1,13 @@
-from flask import current_app, jsonify
+from flask import current_app, jsonify, make_response
 from . import web
 from app.validators.form import ClientForm
 from app.libs.enums import ClientTypeEnum
 from app.model.user import User
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from app.libs.error_code import Success
 
 
-@web.route('/login', methods=['POST'])
+@web.route('/login', methods=['GET'])
 def login():
     form = ClientForm().validate_for_api()
     promise = {
@@ -26,7 +27,10 @@ def login():
     t = {
         'token': token.decode('ascii')
     }
-    return jsonify(t), 201
+    resp = make_response(Success())
+    resp.headers['Auth'] = jsonify(t)
+    # return jsonify(t), 201
+    return resp
 
 
 def generate_auth_token(id, ac_type, scope=None,expiration=7200):

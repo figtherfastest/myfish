@@ -11,21 +11,19 @@ class UserScope(Scope):
 
 
 class AdminScope(Scope):
-    allow_api = ['api.A', 'api.B']
+    allow_api = ['api.get_admin_users']
 
     def __init__(self):
         self+UserScope()
         print(self.allow_api)
 
+# class SuperScope(Scope):
+#     allow_api = ['api.C', 'api.D']
+#
+#     def __init__(self):
+#         self+AdminScope()
+#         print(self.allow_api)
 
-class SuperScope(Scope):
-    allow_api = ['api.C', 'api.D']
-
-    def __init__(self):
-        self+AdminScope()
-        print(self.allow_api)
-
-SuperScope()
 
 def is_in_scope(scope, endpoint):
     scope = globals()[scope]()
