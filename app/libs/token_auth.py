@@ -1,4 +1,4 @@
-from flask import current_app, jsonify, g, request
+from flask import current_app, g, request
 from collections import namedtuple
 from flask_httpauth import HTTPBasicAuth
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired

@@ -8,3 +8,4 @@ from app.api import user
 from app.api import gift
 from app.api import login
 from app.api import admin
+from app.api import wishes
