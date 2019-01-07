@@ -1,4 +1,5 @@
 from flask import Flask as _Flask
+from flask_cors import *
 from app.model.base import db
 from flask.json import JSONEncoder as _JSONEncoder
 from datetime import date
@@ -7,6 +8,7 @@ from app.libs.error_code import ServerError
 
 def create_app():
     app = Flask(__name__)
+    CORS(app)
     app.config.from_object("app.secure")
     app.config.from_object("app.setting")
     register_blueprint(app)
