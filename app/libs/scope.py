@@ -8,7 +8,8 @@ class Scope:
 
 class UserScope(Scope):
     allow_api = ['api.get_user', 'api.book_search', 'api.book_detail',
-                 'api.save_to_gifts', 'api.get_wishes', 'api.save_to_wish']
+                 'api.save_to_gifts', 'api.get_wishes', 'api.save_to_wish',
+                 'api.resetPassword']
 
 
 class AdminScope(Scope):

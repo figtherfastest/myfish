@@ -32,6 +32,12 @@ class User(Base):
             db.session.add(user)
 
     @staticmethod
+    def reset_by_email(user, secret):
+        with db.auto_commit():
+            user.password = secret
+            db.session.add(user)
+
+    @staticmethod
     def verify(email, password):
         user = User.query.filter_by(email=email).first_or_404()
         if not user.check_password(password):

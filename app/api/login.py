@@ -7,8 +7,6 @@ from app.libs.error_code import Success
 from app.model.user import User
 
 
-
-
 @web.route('/login', methods=['POST'])
 def login():
     form = ClientForm().validate_for_api()

@@ -1,4 +1,3 @@
-from flask import make_response
 from . import web
 from app.validators.form import ClientForm, UserEmailForm
 from app.libs.enums import ClientTypeEnum
