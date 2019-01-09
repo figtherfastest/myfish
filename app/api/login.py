@@ -26,10 +26,10 @@ def login():
     t = {
         'token': token.decode('ascii')
     }
-    resp = make_response(Success())
-    resp.headers['Auth'] = jsonify(t)
-    # return jsonify(t), 201
-    return resp
+    # resp = make_response(Success())
+    # resp.headers['Auth'] = jsonify(t)
+    return jsonify(t), 201
+    # return resp
 
 
 def generate_auth_token(id, ac_type, scope=None, expiration=7200):

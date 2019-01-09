@@ -6,6 +6,7 @@ from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookCollection
 from app.view_models.book import BookViewModel
 from app.libs.token_auth import auth
+from app.model.book import Book
 import json
 
 
@@ -25,7 +26,9 @@ def book_search():
     else:
         yushu_book.search_by_keyword(q, page)
     book.fill(yushu_book, q)
-    return json.dumps(book, default=lambda o: o.__dict__)
+    book_detail = json.dumps(book, default=lambda o: o.__dict__)
+    Book.add_to_current_upload(book_detail)
+    return book_detail
 
 
 @web.route('/book/detail/<isbn>', methods=['GET'])
