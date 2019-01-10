@@ -1,4 +1,4 @@
-from flask import request
+from flask import jsonify
 from . import web
 from app.validators.form import searchForm
 from app.libs.helper import is_isbn_or_key
@@ -8,6 +8,7 @@ from app.view_models.book import BookViewModel
 from app.libs.token_auth import auth
 from app.model.book import Book
 import json
+from app.libs.error_code import Success
 
 
 @web.route('/book/search', methods=['GET'])
@@ -40,4 +41,12 @@ def book_detail(isbn):
     return json.dumps(book, default=lambda o: o.__dict__)
 
 
+@web.route('/book/getCurrent', methods=['GET'])
+@auth.login_required
+def get_current_upload():
+    book_all = Book.query.filter_by().all()
+    book = {
+        'book': book_all
+    }
+    return jsonify(book)
 
