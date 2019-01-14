@@ -4,9 +4,9 @@ from sqlalchemy.orm import relationship
 
 
 class Wish(Base):
-    wishId = Column(SmallInteger, primary_key=True)
+    id = Column(SmallInteger, primary_key=True)
     user = relationship('User')
-    id = Column(SmallInteger, ForeignKey('user.id'), nullable=False)
+    uid = Column(SmallInteger, ForeignKey('user.id'), nullable=False)
     wishIsbn = Column(String(13), nullable=False)
     launched = Column(Boolean, default=False)
 

@@ -61,4 +61,3 @@ class resetPsd(ClientForm):
     account = StringField(validators=[DataRequired(), Length(min=8, max=64),
                                       Email(message='电子邮箱不符合规范')])
     password = PasswordField('密码', validators=[DataRequired(message='至少两位'), Length(min=6, max=32)])
-

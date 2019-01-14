@@ -1,11 +1,8 @@
 1.实现注册
-    1.1 实现不同用户的教研注册，用户的
-{"account": "666@qq.com","password": "123456","type":100,"nickname":"李小刚"}
-eyJhbGciOiJIUzUxMiIsImlhdCI6MTU0NjE1MzE5MiwiZXhwIjoxNTQ3ODgxMTkyfQ.eyJpZCI6MSwidHlwZSI6MTAwLCJzY29wZSI6IlVzZXJTY29wZSJ9.Owttj6s4zQ8daENGCV3mmXNqJhNJddWw9_mC5waphhJXqKSZOM12ibFIx74SkRAMwfRMnYce1zJ6Oze3Dpd0cw
 2.实现登录
     2.1所谓的实现登录，核心就是生成token，让以后的请求接口携带token，验证token，如果token过期了，则重新登录
-
-ISBN 9787531328858
+    2.2 前端在加密的时候，应该使用base64的bota加密，由于后端使用的是basic auth的加密方式，但是这种的加密方式是有缺点的，就是安全性比较低，把所有的加密字符串都都放在了前端的header之中，
+    
 
 
 

@@ -45,8 +45,13 @@ def book_detail(isbn):
 @auth.login_required
 def get_current_upload():
     book_all = Book.query.filter_by().all()
-    book = {
+    status_code = Success.__dict__
+    book_status = {
+        'status': {
+            'code': status_code['code'],
+            'msg': status_code['msg'],
+            'error_code': status_code['error_code']
+        },
         'book': book_all
     }
-    return jsonify(book)
-
+    return jsonify(book_status)

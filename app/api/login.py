@@ -4,6 +4,7 @@ from app.validators.form import ClientForm
 from app.libs.enums import ClientTypeEnum
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from app.libs.error_code import Success
+from app.libs.responce import make_resp
 from app.model.user import User
 
 
@@ -23,13 +24,8 @@ def login():
         identity['scope'],
         expiration
     )
-    t = {
-        'token': token.decode('ascii')
-    }
-    # resp = make_response(Success())
-    # resp.headers['Auth'] = jsonify(t)
-    return jsonify(t), 201
-    # return resp
+    result_token = token.decode('ascii')
+    return make_resp(Success, 'token', result_token)
 
 
 def generate_auth_token(id, ac_type, scope=None, expiration=7200):

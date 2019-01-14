@@ -12,6 +12,7 @@ class Success(APIException):
     error_code = 0
 
 
+
 class DeleteSuccess(Success):
     code = 202
     msg = 'ok'
