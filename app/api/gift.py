@@ -12,7 +12,6 @@ from app.libs.error_code import Success
 def save_to_gifts(isbn):
     yushu_book = YuShuBook()
     yushu_book.search_by_isbn(isbn)
-    print(yushu_book.books[0]['isbn'])
     with db.auto_commit():
         gift = Gift()
         gift.id = g.user.id
