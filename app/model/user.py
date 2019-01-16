@@ -2,6 +2,10 @@ from sqlalchemy import Column, Integer, String, SmallInteger
 from app.model.base import Base, db
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.libs.error_code import AuthFailed
+from app.libs.helper import is_isbn_or_key
+from app.model.gift import Gift
+from app.model.wish import Wishes
+
 
 
 class User(Base):
@@ -49,3 +53,14 @@ class User(Base):
         if not self._password:
             return False
         return check_password_hash(self._password, raw)
+
+    @staticmethod
+    def can_save_to_list(isbn, user_id):
+        if is_isbn_or_key(isbn) != 'isbn':
+            return False
+        gift = Gift.query.filter_by(id=user_id, bookIsbn=isbn, launched=False).first()
+        wish = Wishes.query.filter_by(id=user_id, wishIsbn=isbn, launched=False).first()
+        if not gift and not wish:
+            return True
+        else:
+            return False
